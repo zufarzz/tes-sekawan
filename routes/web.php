@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/kendaraan', KendaraanController::class);
+Route::resource('/region', RegionController::class);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

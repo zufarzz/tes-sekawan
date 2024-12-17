@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Region;
 use App\Http\Requests\StoreRegionRequest;
 use App\Http\Requests\UpdateRegionRequest;
+use Illuminate\Http\Request;
 
 class RegionController extends Controller
 {
@@ -13,7 +14,9 @@ class RegionController extends Controller
      */
     public function index()
     {
-        //
+        $type_menu = "region";
+        $region = Region::paginate(10);
+        return view('region.index' , compact('region' , 'type_menu'));
     }
 
     /**
@@ -21,15 +24,22 @@ class RegionController extends Controller
      */
     public function create()
     {
-        //
+        $type_menu = "region";
+
+        return view('region.create', compact('type_menu'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRegionRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_region' => 'required'
+        ]);
+
+            Region::create($validatedData);
+        return redirect(route('region.index'));
     }
 
     /**
@@ -45,15 +55,24 @@ class RegionController extends Controller
      */
     public function edit(Region $region)
     {
-        //
+        $type_menu = "region";
+        
+        return view('region.edit', compact('region' , 'type_menu'));
     }
+    
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRegionRequest $request, Region $region)
+    public function update(Request $request, Region $region)
     {
-        //
+        $type_menu = "region";
+
+        $validatedData = $request->validate([
+            'nama_region' => 'required', 
+        ]);
+        $region->update($validatedData);
+        return redirect(route('region.index'));
     }
 
     /**
@@ -61,6 +80,7 @@ class RegionController extends Controller
      */
     public function destroy(Region $region)
     {
-        //
+        $region->delete();
+        return redirect()->route('region.index');
     }
 }
