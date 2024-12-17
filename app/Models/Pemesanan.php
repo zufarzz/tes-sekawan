@@ -22,32 +22,23 @@ class Pemesanan extends Model
         'tujuan'
     ];
 
-    public function id_kendaraan() {
+    public function id_kendaraans() {
         return $this->belongsTo(Kendaraan::class, 'id_kendaraan', 'id');
     }
-    public function driver() {
+    public function drivers() {
         return $this->belongsTo(User::class, 'driver', 'id');
     }
-    public function atasan1() {
+    public function atasan1s() {
         return $this->belongsTo(User::class, 'atasan1', 'id');
     }
-    public function atasan2() {
+    public function atasan2s() {
         return $this->belongsTo(User::class, 'atasan2', 'id');
     }
-    public function asal() {
+    public function asals() {
         return $this->belongsTo(Region::class, 'asal', 'id');
     }
-    public function tujuan() {
+    public function tujuans() {
         return $this->belongsTo(Region::class, 'tujuan', 'id');
     }
-
-    protected $with = [
-        'id_kendaraan',
-        'driver',
-        'atasan1',
-        'atasan2',
-        'asal',
-        'tujuan'
-    ];
     
 }

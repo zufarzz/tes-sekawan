@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KendaraanController;
+use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegionController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,7 @@ Route::get('/', function () {
 
 Route::resource('/kendaraan', KendaraanController::class);
 Route::resource('/region', RegionController::class);
+Route::resource('/pemesanan', PemesananController::class);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
