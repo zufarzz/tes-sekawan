@@ -10,7 +10,7 @@ class Kendaraan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'jenis', 
+        'jenis_angkutan', 
         'kepemilikan', 
         'nama_kendaraan', 
         'konsumsi_bbm', 

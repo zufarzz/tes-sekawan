@@ -14,8 +14,9 @@ class KendaraanController extends Controller
      */
     public function index()
     {
-        $kendaraan = Kendaraan::all();
-        return view('kendaraan.index', compact('kendaraan'));
+        $type_menu = "kendaraan";
+        $kendaraan = Kendaraan::paginate(10);
+        return view('kendaraan.index', compact('kendaraan', 'type_menu'));
     }
 
     /**
@@ -23,7 +24,9 @@ class KendaraanController extends Controller
      */
     public function create()
     {
-        return view('kendaraan.create');
+        $type_menu = "kendaraan";
+
+        return view('kendaraan.create', compact('type_menu'));
     }
 
     /**
@@ -32,7 +35,7 @@ class KendaraanController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'jenis' => 'required', 
+            'jenis_angkutan' => 'required', 
         'kepemilikan' => 'required', 
         'nama_kendaraan' => 'required', 
         'konsumsi_bbm' => 'required', 
@@ -56,7 +59,9 @@ class KendaraanController extends Controller
      */
     public function edit(Kendaraan $kendaraan)
     {
-        return view('kendaraan.edit', compact('kendaraan'));
+        $type_menu = "kendaraan";
+        
+        return view('kendaraan.edit', compact('kendaraan' , 'type_menu'));
     }
 
     /**
@@ -65,7 +70,7 @@ class KendaraanController extends Controller
     public function update(Request $request, Kendaraan $kendaraan)
     {
         $validatedData = $request->validate([
-            'jenis' => 'required', 
+            'jenis_angkutan' => 'required', 
         'kepemilikan' => 'required', 
         'nama_kendaraan' => 'required', 
         'konsumsi_bbm' => 'required', 
