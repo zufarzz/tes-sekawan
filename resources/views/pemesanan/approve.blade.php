@@ -33,7 +33,7 @@
                                         <th scope="col">Tujuan</th>
                                         <th scope="col">Approve yang menyetujui</th>
                                         <th scope="col">Approve atasan yang menyetujui</th>
-                                        <th scope="col" colspan="2">Aksi</th>
+                                        <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -111,18 +111,6 @@
                                             <td><a href="{{ route('pemesanan.edit', $item) }}"
                                                 class="btn fa-regular fa-pen-to-square bg-warning p-2 text-white"
                                                 data-toggle="tooltip" title="Edit Pemesanan"></a> 
-                                            </td>
-                                            <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                    action="{{ route('pemesanan.destroy', $item) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <!-- <button type="submit" class="fa-solid fa-trash bg-danger p-2 text white"></button> -->
-                                                    <button type="submit"
-                                                        class="btn fa-solid fa-trash bg-danger p-2 text-white"
-                                                        data-toggle="tooltip" title="Hapus Pemesanan"></button>
-                                                </form>
                                             </td>
                                         </tr>
                                     @empty

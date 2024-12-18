@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('driver')->constrained('users', 'id');
             $table->foreignId('atasan1')->constrained('users', 'id');
             $table->foreignId('atasan2')->constrained('users', 'id');
-            $table->enum('approve_atasan1',['approved','rejected']);
-            $table->enum('approve_atasan2',['approved','rejected']);
+            $table->enum('approve_atasan1',['pending','approved','rejected'])->default('pending');
+            $table->enum('approve_atasan2',['pending','approved','rejected'])->default('pending');
             $table->date('tanggal_mulai');
             $table->date('tanggal_akhir');
             $table->foreignId('asal')->constrained('regions', 'id');

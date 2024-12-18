@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pemesanan;
-use App\Http\Requests\StorePemesananRequest;
-use App\Http\Requests\UpdatePemesananRequest;
 use App\Models\Kendaraan;
 use App\Models\Region;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class PemesananController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $type_menu = "pemesanan";
-        $pemesanan = Pemesanan::with(['id_kendaraans', 'drivers', 'atasan1s', 'atasan2s', 'asals', 'tujuans'])->paginate(10);
-        return view('pemesanan.index', compact('pemesanan', 'type_menu'));
+        $type_menu = "user";
+        $user = User::with(['id_kendaraans', 'drivers', 'atasan1s', 'atasan2s', 'asals', 'tujuans'])->paginate(10);
+        return view('user.index', compact('user', 'type_menu'));
     }
 
     /**
@@ -27,7 +24,7 @@ class PemesananController extends Controller
      */
     public function create()
     {
-        $type_menu = "pemesanan";
+        $type_menu = "user";
 
         $kendaraan = Kendaraan::all();
         $driver = User::where('level', 4)->get();
@@ -36,7 +33,7 @@ class PemesananController extends Controller
         $region = Region::all();
 
 
-        return view('pemesanan.create', compact('type_menu', 'kendaraan', 'driver', 'atasan2', 'atasan1', 'region'));
+        return view('user.create', compact('type_menu', 'kendaraan', 'driver', 'atasan2', 'atasan1', 'region'));
     }
 
     /**
@@ -55,15 +52,14 @@ class PemesananController extends Controller
             'tujuan' => 'required',
         ]);
 
-        pemesanan::create($validatedData);
-        return redirect(route('pemesanan.index'));
+        User::create($validatedData);
+        return redirect(route('user.index'));
     }
-
 
     /**
      * Display the specified resource.
      */
-    public function show(Pemesanan $pemesanan)
+    public function show(User $user)
     {
         //
     }
@@ -71,9 +67,9 @@ class PemesananController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pemesanan $pemesanan)
+    public function edit(User $user)
     {
-        $type_menu = "pemesanan";
+        $type_menu = "user";
 
         $kendaraan = Kendaraan::all();
         $driver = User::where('level', 4)->get();
@@ -81,13 +77,13 @@ class PemesananController extends Controller
         $atasan1 = User::where('level', 2)->get();
         $region = Region::all();
 
-        return view('pemesanan.edit', compact('type_menu', 'pemesanan', 'kendaraan', 'driver', 'atasan2', 'atasan1', 'region'));
+        return view('user.edit', compact('type_menu', 'pemesanan', 'kendaraan', 'driver', 'atasan2', 'atasan1', 'region'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pemesanan $pemesanan)
+    public function update(Request $request, User $user)
     {
         $validatedData = $request->validate([
             'id_kendaraan' => 'required',
@@ -101,27 +97,16 @@ class PemesananController extends Controller
 
         ]);
 
-        $pemesanan->update($validatedData);
-        return redirect(route('pemesanan.index'));
+        $user->update($validatedData);
+        return redirect(route('user.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pemesanan $pemesanan)
+    public function destroy(User $user)
     {
-        $pemesanan->delete();
-        return redirect()->route('pemesanan.index');
-    }
-
-    public function approvePage()
-    {
-        $type_menu = "approve_pemesanan";
-        $pemesanan = Pemesanan::where('atasan1', auth()->user()->id)
-        ->orWhere('atasan2', auth()->user()->id)
-        ->orderByDesc('created_at')
-        ->paginate(10);
-
-        return view('pemesanan.approve', compact('type_menu', 'pemesanan'));
+        $user->delete();
+        return redirect()->route('user.index');
     }
 }
